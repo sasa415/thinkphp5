@@ -1,0 +1,58 @@
+
+<!-- 头部静态文件调用 血糖编辑页面 -->
+{include file="layout/header_model_add"}
+<!--添加店铺样式-->
+<div class="Inside_pages clearfix">
+{include file="layout/side_navigation_bar"}
+<!--右侧内容样式-->
+<div class="right_style">
+  <!--内容详细-->
+   <div class="title_style"><em></em><a href="{:url('index/ulist')}">血脂列表</a>>添加</div>
+   <div class="content_style">
+   <ul class="add_shops_style">
+     <form class="contact" action="#" id="form1" onclick="return false">
+        <input type="hidden" id="user_id" name="user_id"  value="{$res.user_id}">
+        <input type="hidden" value="{$res.id}" name="id" id="id">
+        <li>
+            <label> 尿素氮：</label>
+            <div class="add_right_style"> <input type="text" id="usea" name="usea"  class="text_name" placeholder="正常值为： 2.9～7.5mmol/L(8～21mg/dl)" value="{$res.usea}" data-required="true" data-validation="text"  data-msg="Invalid E-Mail" >
+            </div>
+        </li>
+         <li>
+            <label> 肌酐：</label>
+            <div class="add_right_style"> <input type="text" id="creatinine" name="creatinine" data-required="true" data-validation="custom"
+                        data-msg="Invalid Phone #" placeholder="正常值为： 男 53～106umol/L女 44～97umol/L " value="{$res.creatinine}" class="text_name">
+            </div>
+        </li>
+         <li>
+            <label> 尿酸：</label>
+            <div class="add_right_style"> <input type="text" name="purine_trione" id="purine_trione" placeholder="正常值为： 成人：90～420umol/L" value="{$res.purine_trione}" class="text_name">
+            </div>
+        </li>
+
+    </form>
+        <button id="sub"  class="submit Next_btn" >修改</button>
+   </ul>
+  </div>
+  </div>
+</div>
+<script>
+    // 点击修改按钮调用ajax
+    $("#sub").click(function(){
+      $.ajax({
+                     type: "POST",
+                     url: "{:url('admin/index/save')}",
+                     data: $('#form1').serialize(),
+                     dataType: "json",
+                     success: function (data) {
+                        console.log(data);
+                        // 提示信息
+                       layer.alert(data.msg,function(index){
+                        // 跳转至列表页面
+                        window.location.href="{:url('admin/index/ulist')}";
+                       });
+                     }
+                 })
+    });
+</script>
+{include file="layout/footer_model_add"}

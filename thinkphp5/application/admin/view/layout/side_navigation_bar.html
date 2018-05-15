@@ -1,0 +1,12 @@
+<!--  模块新增列表的  侧边导航栏 -->
+<div class="left_style">
+<!--列表-->
+   <!--列表-->
+  <div class="menu_style">
+   <ul class="menu_list">
+    <li  {if condition="$active eq 1"} class="on" {/if} ><em></em><a href="{:url('index/ulist')}">血脂</a></li>
+    <li {if condition="$active eq 2"} class="on" {/if} ><em></em><a href="{:url('index/bloodSugar')}">血糖</a></li>
+    <li  {if condition="$active eq 3"} class="on" {/if} ><em></em><a href="{:url('index/physicalShow')}">体测</a></li>
+    <li><em></em><a href="#">血压</a></li>
+  </div>
+ </div>

@@ -1,0 +1,41 @@
+<head>
+ <div id="header_top">
+    <div id="header"  class="header page_style">
+        <div class="logo"><a href="index.html"><img src="__STATIC__/images/LOGO.jpg" style="width:193px;height:93px;"/></a></div>
+        <!--结束图层-->
+        <div class="Search">
+              <div class="search_list">
+                  <ul>
+                      <li class="current"><a href="#">产品</a></li>
+                      <li><a href="#">信息</a></li>
+                  </ul>
+              </div>
+              <div class="clear search_cur">
+                 <input name="searchName" id="searchName" class="search_box" onkeydown="keyDownSearch()" type="text">
+                 <input name="" type="submit" value="搜 索"  class="Search_btn"/>
+              </div>
+              <!--
+              <div class="clear hotword">热门搜索词：香醋&nbsp;&nbsp;&nbsp;茶叶&nbsp;&nbsp;&nbsp;草莓&nbsp;&nbsp;&nbsp;葡萄&nbsp;&nbsp;&nbsp;菜油</div>
+              -->
+      </div>
+   <!--购物车样式-->
+   <div class="hd_Shopping_list" id="Shopping_list">
+   </div>
+  </div>
+  <!--菜单栏-->
+  <div class="Navigation" id="Navigation">
+     <ul class="Navigation_name">
+      <li><a href="{:url('index/index')}">首页</a></li>
+      <li><a href="#">你身边的健康</a></li>
+      <li><a href="#">健康案例</a><em class="hot_icon"></em></li>
+      <li><a href="{:url('index/ulist')}">信息录入</a></li>
+
+      <li><a href="#">热点新闻</a></li>
+      <li><a href="#">热销活动</a></li>
+      <li><a href="Brands.html">联系我们</a></li>
+     </ul>
+    </div>
+    <script>$("#Navigation").slide({titCell:".Navigation_name li",trigger:"click"});</script>
+    </div>
+</head>
+

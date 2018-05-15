@@ -1,0 +1,89 @@
+
+<!-- 头部静态文件调用 血糖编辑页面 -->
+{include file="layout/header_model_add"}
+<!--添加店铺样式-->
+<div class="Inside_pages clearfix">
+{include file="layout/side_navigation_bar"}
+<!--右侧内容样式-->
+<div class="right_style">
+  <!--内容详细-->
+   <div class="title_style"><em></em><a href="{:URL('index/bloodSugar')}">血糖列表</a>>添加</div>
+   <div class="content_style">
+   <ul class="add_shops_style">
+    <form class="contact" id="myForm" onsubmit="return false" accept-charset="utf-8" >
+        <li>
+            <label> 采血样量：</label>
+            <div class="add_right_style"> <input type="text" name="blood_sampling"  class="text_name">
+            </div>
+        </li>
+         <li>
+            <label> 测试范围：</label>
+            <div class="add_right_style"> <input type="text"  name="test_range"   class="text_name">
+            </div>
+        </li>
+         <li>
+            <label> 测试温度：</label>
+            <div class="add_right_style"> <input type="text" name="test_worm"  class="text_name">
+            </div>
+        </li>
+
+         <li>
+            <label> 测试时长：</label>
+            <div class="add_right_style"> <input type="text"  name="time"  class="text_name">
+            </div>
+        </li>
+        <li>
+            <label>  血糖值：</label>
+            <div class="add_right_style"> <input type="text" name="test_num"   class="text_name">
+            </div>
+        </li>
+        <li>
+            <label>  葡萄糖耐量：</label>
+            <div class="add_right_style"> <input type="text"  name="glucose_tolerance"  class="text_name">
+            </div>
+        </li>
+        <li>
+            <label>  饮食背景：</label>
+            <div class="add_right_style"> <input type="text"  name="glucose_tolerance" class="text_name">
+            </div>
+        </li>
+        <li>
+            <label>身体状况: </label>
+            <div class="add_right_style">
+                <textarea name="body" rows="6" cols="200" value="" class="textarea"></textarea>
+            </div>
+        </li>
+    </form>
+        <a href="#" class="Next_btn submit"  value="Send Message"  >修改</a>
+   </ul>
+  </div>
+  </div>
+</div>
+<script  type="text/javascript" >
+        $(document).on('click','.submit',function(){
+            var url = "/thinkphp5/public/index.php/admin/index/editBloodSuger/id/0"
+             $.ajax({
+                url: url,
+                dataType: "json",
+                type: "POST",
+                data: $('#myForm').serialize(),
+                success: function (response) {
+                   var data = response;
+                    if (data.code == 200){
+                        layer.msg('成功',{
+                            icon:2
+                        });
+                        location.href = data.url;
+                    } else {
+                        layer.msg(data.message.error,{
+                            icon:2
+                        });
+                    }
+                },error:function(error){
+                    console.log(error);
+                }
+
+            });
+        });
+</script>
+{include file="layout/footer_model_add"}

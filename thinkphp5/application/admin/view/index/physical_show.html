@@ -1,0 +1,49 @@
+
+
+<!-- 头部静态文件调用 血糖列表页面 -->
+{include file="layout/header_model_add"}
+<!--内页样式 -->
+<div class="Inside_pages clearfix">
+{include file="layout/side_navigation_bar"}
+<!--右侧内容样式-->
+<div class="right_style">
+ <form action ="{:URL('index/deleteBloodSuger')}" method="post">
+  <!--内容详细-->
+   <div class="title_style" ><em></em>体测列表  <a href="physicalInsert" class="btn btn-info">新增  </a>  <input type="submit" value="删除" class="btn btn-info"></div>
+    <div class="content_style">
+    <!--评价管理样式-->
+     <div class="Appraisal_style">
+      <div class="Appraisal_list">
+      <table>
+         <thead>
+         <tr class="label_name"><td>选择</td><td class="time">测试时间</td><td class="name">脂肪含量</td><td class="name">水分含量</td><td class="score">标题</td><td class="operating">操作</td></tr>
+         </thead>
+       <tbody>
+        {if isset($arr)}
+        {volist name="arr" id="vo"}
+        <tr>
+        <td><input type="checkbox"  name="id[]" value="{$vo.id}"></td><td>  0000-00-00 </td><td>{$vo.fatcontent}</td>
+        <td>
+        {$vo.moisture}
+        </td>
+        <td>内容</td>
+        <td class="operating_btn center"><a href="physicalUpdate/id/{$vo.id}" >编辑</a>|<a href="view/id/{$vo.id}">详情</a>|<a href="physicalDelete/id/{$vo.id}">删除</a></td></tr>
+         {/volist}
+        {/if}
+       </tbody>
+      </table>
+      </div>
+      <div class="Pagination_tow">
+      <div class="right">
+     <!--  <div class="right row" >
+     </div> -->
+      </div>
+     </div>
+    </div>
+ </div>
+ </form>
+</div>
+</div>
+<!-- 底部 文件调用-->
+{include file="layout/footer_model_add"}
+

@@ -1,0 +1,32 @@
+<!-- 头部静态文件调用 血糖列表页面 -->
+{include file="layout/index_head"}
+
+ </div>
+    <script type="text/javascript">
+    jQuery(".slideBox").slide({titCell:".hd ul",mainCell:".bd ul",autoPlay:true,autoPage:true});
+    </script>
+ </div>
+<!--广告幻灯片样式-->
+    <div id="slideBox" class="slideBox">
+      <div class="hd">
+        <ul class="smallUl"></ul>
+      </div>
+      <div class="bd">
+        <ul>
+          <li><a href="#" target="_blank"><div style="background:url(__STATIC__/AD/ask_001.jpg) no-repeat; background-position:center; width:100%; height:345px;"></div></a></li>
+          <li><a href="#" target="_blank"><div style="background:url(__STATIC__/AD/ask_002.jpg) no-repeat; background-position:center ; width:100%; height:345px;"></div></a></li>
+          <li><a href="#" target="_blank"><div style="background:url(__STATIC__/AD/ask_003.jpg) no-repeat; background-position:center; width:100%; height:345px;"></div></a></li>
+          <li><a href="#" target="_blank"><div style="background:url(__STATIC__/AD/ask_004.jpg) no-repeat; background-position:center; width:100%; height:345px;"></div></a></li>
+        </ul>
+      </div>
+      <!-- 下面是前/后按钮-->
+      <a class="prev" href="javascript:void(0)"></a>
+      <a class="next" href="javascript:void(0)"></a>
+
+    </div>
+    <script type="text/javascript">
+    jQuery(".slideBox").slide({titCell:".hd ul",mainCell:".bd ul",autoPlay:true,autoPage:true});
+    </script>
+ </div>
+<!-- 底部 文件调用-->
+{include file="layout/footer_model_add"}

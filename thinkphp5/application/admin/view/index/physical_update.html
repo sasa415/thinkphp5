@@ -1,0 +1,56 @@
+<!-- 头部静态文件调用 血糖编辑页面 -->
+{include file="layout/header_model_add"}
+<!--添加店铺样式-->
+<div class="Inside_pages clearfix">
+{include file="layout/side_navigation_bar"}
+<!--右侧内容样式-->
+<div class="right_style">
+  <!--内容详细-->
+   <div class="title_style"><em></em><a href="{:URL('index/bloodSugar')}">血糖列表</a>>添加</div>
+   <div class="content_style">
+   <ul class="add_shops_style">
+   <form action="index/Index/show" method="post">
+        <input type="hidden" name="id" value="{$res['id']}">
+        <li>
+            <label> 身高：</label>
+            <div class="add_right_style"> <input type="text" name="height"  class="text_name" value="{$res['height']}">
+            </div>
+        </li>
+         <li>
+            <label> 体重：</label>
+            <div class="add_right_style"> <input type="text"  name="weight"   class="text_name" value="{$res['weight']}">
+            </div>
+        </li>
+         <li>
+            <label> 脂肪含量：</label>
+            <div class="add_right_style"> <input type="text" name="fatcontent"  class="text_name" value="{$res['fatcontent']}">
+            </div>
+        </li>
+
+         <li>
+            <label> 水分含量：</label>
+            <div class="add_right_style"> <input type="text"  name="moisture"  class="text_name" value="{$res['moisture']}">
+            </div>
+        </li>
+        <li>
+            <label>  肌肉含量：</label>
+            <div class="add_right_style"> <input type="text" name="muscle"   class="text_name" value="{$res['muscle']}">
+            </div>
+        </li>
+        <li>
+            <label> 骨骼含量：</label>
+            <div class="add_right_style"> <input type="text"  name="bone"  class="text_name" value="{$res['bone']}">
+            </div>
+        </li>
+        <li>
+            <label> 内脏脂肪含量：</label>
+            <div class="add_right_style"> <input type="text"  name="visceralfat" class="text_name" value="{$res['visceralfat']}">
+            </div>
+        </li>
+        <button class="Next_btn submit"  value="Send Message"  >新增</button>
+    </form>
+   </ul>
+  </div>
+  </div>
+</div>
+{include file="layout/footer_model_add"}

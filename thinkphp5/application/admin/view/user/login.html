@@ -1,0 +1,109 @@
+<!-- 头部 文件调用-->
+{include file="layout/header_user"}
+<div id="loginbox">
+     <div class="logo"><a href="http://www.qiranjiankang.com/">健康咨询</a></div>
+     <div class="form-login" id="app">
+     <form method="post"  @submit.prevent="login" id="myform" >
+            <h2>登录 | <a href="regist">注册</a></h2>
+            <div class="input">
+                <label>用户名：</label><input type="text" id="username" name="username" size="22" class="input-text"  v-model="post.username" >
+            </div>
+            <div class="input">
+                <label>密码：</label><input type="password" id="password" name="password" size="22" class="input-text" v-model="post.password">
+            </div>
+            <div class="input">
+                <label>验证码：</label><input type="text" id="verifyCode" name="verifyCode" size="8" class="input-text" v-model="post.verifyCode">
+                <div>{:captcha_img()}</div>
+                <form-error v-if="errors == 'verifyCode'" :errors = "errors">{{message}}</form-error>
+           </div>
+           <form-error v-if="errors == 'message'" :errors = "errors" >
+                <div class = "input">
+                  <label></label> <div class="onError">{{message}}</div>
+                </div>
+           </form-error>
+            {:token()}
+           <div class="submit"><input type="submit" name="dosubmit" id="dosubmit" value="登录"></div>
+    </form>
+    </div>
+    <div id="footer">
+        <p class="cp">&copy; <a href="index">北京易米科技有限公司</a> 版权所有</p>
+    </div>
+</div>
+
+<!-- <div id="app">
+ <form @submit.prevent="login" method="post" accept-charset="utf-8">
+
+ <form action="login" method="post" accept-charset="utf-8">
+    用户名
+    <input type="text" name="username" value="" placeholder="" v-model="post.username" required>
+    密码
+    <input type="password" name="password" value="" placeholder="" v-model="post.password" autocomplete="off" required>
+    <form-error v-if="errors == 'message'" :errors = "errors" >{{message}}</form-error>
+    {if isset($think.cookie.admin.remember)}
+    {if condition="$think.cookie.admin.remember eq 1"}
+        <input type="checkbox" name="remember" value="1" checked class="remember-btn">
+     {elseif condition="$think.cookie.admin.remember eq ''" /}
+        <input type="checkbox" name="remember" value="1" class="remember-btn">
+     {/if}
+     {else/}
+        <input type="checkbox" name="remember" value="1" class="remember-btn">
+     {/if}
+
+     <span class="remember-text">记住密码</span>
+     {:token()}
+    <button type="submit">注册</button>
+</form>
+</div>
+-->
+<script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        post:{
+            username: '',
+            password: '',
+            verifyCode : ''
+        },
+        errors:[],
+        message:[]
+      },
+      // 在 `methods` 对象中定义方法
+      methods: {
+        login: function () {
+            var self = this;
+            //项目路径
+            axios.post('/thinkphp5/public/index.php/admin/user/login', self.post).
+             then(function(response) {
+                /*optional stuff to do after success */
+                if(response.data.code == 2){
+                    //表单验证
+                    self.message = response.data.message;
+                    self.errors = 'message';
+                }
+                if(response.data.code == 0){
+                    //表单验证
+                    var ziduan = response.data.message.ziduan;//username
+                    self.message = response.data.message.error;
+                    self.errors= 'verifyCode';
+                    //刷新验证码 verifyCodeImg
+                     $('#verifyCodeImg').attr("src",$('#verifyCodeImg').attr("src")+"?"+Math.random());
+                }
+                 if(response.data.code == 200){
+                    //成功注册返回
+                    layer.msg('登录成功',{time:1000,icon:6},function(){
+                        location.href = response.data.url;
+                    });
+                }
+            }).
+            catch(function (error) {
+                //数据交互错误抓取
+                console.log(error);
+            });
+        }
+      }
+});
+</script>
+
+
+<!-- 底部 文件调用-->
+{include file="layout/footer_user"}

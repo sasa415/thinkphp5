@@ -1,0 +1,100 @@
+<!-- 头部静态文件调用 注册页面 -->
+{include file="layout/header_user"}
+<div id="loginbox">
+  <div class="logo"><a href="">健康咨询</a></div>
+  <form @submit.prevent="regist" method="post" accept-charset="utf-8">
+    <div class="form-login">
+        <h2>注册 | <a href="login">登录</a></h2>
+        <input name="modelid" type="hidden" value="17"/>
+        <div class="input"><label>用户名：</label><input type="text" id="username" name="username" size="36" class="input-text" v-model="post.username">
+          <form-error v-if="errors == 'username'" :errors = "errors">{{message}}</form-error>
+        </div>
+        <div class="input"><label>密码：</label><input type="password" id="password" name="password" size="36" class="input-text" v-model="post.password">
+            <form-error v-if="errors == 'password'" :errors = "errors" >{{message}}</form-error>
+        </div>
+        <div class="input"><label>确认密码：</label><input type="password" name="password_confirm" id="password_confirm" size="36" class="input-text" v-model="post.password_confirm">
+        <form-error v-if="errors == 'password_confirm'" :errors = "errors" >{{message}}</form-error>
+        </div>
+        <div class="input"><label>手机号码：</label><input type="text" id="phone" name="phone" size="36" class="input-text" v-model="post.phone">
+             <form-error v-if="errors == 'phone'" :errors = "errors">{{message}}</form-error>
+        </div>
+        {:token()}
+                <div class="submit"><input type="submit" name="dosubmit" value="提交注册" ></div><br />
+        </div>
+    </form>
+
+    <div id="footer">
+        <p class="cp">&copy; <a href="index">北京易米科技</a> 版权所有　</p>
+    </div>
+</div>
+<!-- <div id="app">
+ <form @submit.prevent="regist" method="post" accept-charset="utf-8">
+
+    用户名
+    <input type="text" name="username" value="" placeholder="" v-model="post.username">
+    <form-error v-if="errors == 'username'" :errors = "errors">{{message}}</form-error>
+    密码
+    <input type="password" name="password" value="" placeholder="" v-model="post.password" autocomplete="off">
+    <form-error v-if="errors == 'password'" :errors = "errors" >{{message}}</form-error>
+    确认密码
+    <input type="password" name="password_confirm" value="" placeholder="" v-model="post.password_confirm"  autocomplete="off">
+    <form-error v-if="errors == 'password_confirm'" :errors = "errors" >{{message}}</form-error>
+    手机号码
+    <input type="number" name="phone" value="" placeholder="" v-model="post.phone">
+    <form-error v-if="errors == 'phone'" :errors = "errors">{{message}}</form-error>
+     <div>{:captcha_img()}</div>
+
+    <input type="text" name="verifyCode"  placeholder="请输入验证码" v-model="post.verifyCode" >
+    <form-error v-if="errors == 'verifyCode'" :errors = "errors">{{message}}</form-error>
+    {:token()}
+    <button type="submit">注册</button>
+</form>
+
+</div> -->
+<script type="text/javascript">
+    var app = new Vue({
+      el: '#loginbox',
+      data: {
+        post:{
+            username: '',
+            password: '',
+            phone: '',
+        },
+        errors:[],
+        message:[]
+      },
+      // 在 `methods` 对象中定义方法
+      methods: {
+        regist: function () {
+            var self = this;
+            //项目路径
+            axios.post('/thinkphp5/public/index.php/admin/user/regist', self.post).
+             then(function(response) {
+                /*optional stuff to do after success */
+                if(response.data.code == 0){
+                    //表单验证
+                    var ziduan = response.data.message.ziduan;//username
+                    self.message = response.data.message.error;
+                    self.errors= ziduan.ziduan;
+                }
+                if(response.data.code == 2){
+                    //成功注册返回
+                    layer.msg('注册有误',{time:1000,icon:6});
+                }
+                 if(response.data.code == 200){
+                    //成功注册返回
+                    layer.msg('注册成功',{time:1000,icon:6},function(){
+                        location.href = response.data.url;
+                    });
+                }
+            }).
+            catch(function (error) {
+                //数据交互错误抓取
+                console.log(error);
+            });
+        }
+      }
+});
+</script>
+<!-- 底部 文件调用-->
+{include file="layout/footer_user"}

@@ -1,0 +1,46 @@
+<!-- 头部静态文件调用 血糖列表页面 -->
+{include file="layout/header_model_add"}
+<!--内页样式 -->
+<div class="Inside_pages clearfix">
+{include file="layout/side_navigation_bar"}
+<!--右侧内容样式-->
+<div class="right_style">
+ <form action ="{:URL('index/deleteBloodSuger')}" method="post">
+  <!--内容详细-->
+   <div class="title_style" ><em></em>血糖列表  <a href="editBloodSuger/id/0" class="btn btn-info">新增  </a>  <input type="submit" value="删除" class="btn btn-info"></div>
+    <div class="content_style">
+    <!--评价管理样式-->
+     <div class="Appraisal_style">
+      <div class="Appraisal_list">
+      <table>
+         <thead>
+         <tr class="label_name"><td>选择</td><td class="time">测试时间</td><td class="name">测试温度</td><td class="content">评估</td><td class="score">测试背景</td><td class="operating">操作</td></tr>
+         </thead>
+       <tbody>
+        {volist name="model" id="vo"}
+        <tr>
+        <td><input type="checkbox"  name="id[]" value="{$vo.id}"></td><td>{$vo.add_time}</td><td>{$vo.test_worm}</td>
+        <td>
+        <p>{$vo.evaluation}</p>
+        <div class="Reply_style">
+         <p>血糖值：{$vo.glucose_tolerance}</p>
+        </div>
+        </td>
+        <td>{$vo.test_eat}</td>
+        <td class="operating_btn center"><a href="editBloodSuger/id/{$vo.id}" >编辑</a>|<a href="view/id/{$vo.id}">详情</a></td></tr>
+         {/volist}
+       </tbody>
+      </table>
+      </div>
+      <div class="Pagination_tow">
+      <div class=" row" >
+      {$model->render()}
+      </div>
+     </div>
+    </div>
+ </div>
+ </form>
+</div>
+</div>
+<!-- 底部 文件调用-->
+{include file="layout/footer_model_add"}

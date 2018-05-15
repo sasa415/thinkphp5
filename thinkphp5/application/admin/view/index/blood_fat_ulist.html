@@ -1,0 +1,91 @@
+
+<!-- 头部 文件调用-->
+
+<!-- <form action="{:url('index/index/ulist')}" method="post" >
+    时间<input type="text" id="test1" name="create_time">
+    <button type="submit" class="btn">搜索</button>
+</form> -->
+
+
+
+<!-- 头部静态文件调用 血糖列表页面 -->
+{include file="layout/header_model_add"}
+<!--内页样式 -->
+<div class="Inside_pages clearfix">
+{include file="layout/side_navigation_bar"}
+<!--右侧内容样式-->
+<div class="right_style">
+ <form action ="{:URL('index/deleteBloodSuger')}" method="post">
+  <!--内容详细-->
+   <div class="title_style" ><em></em>血脂列表  <a href="{:URL('index/bloodFatIndex')}" class="btn btn-info">新增  </a>  <input type="submit" value="删除" class="btn btn-info"></div>
+    <div class="content_style">
+    <!--评价管理样式-->
+     <div class="Appraisal_style">
+      <div class="Appraisal_list">
+
+      <table>
+         <thead>
+         <tr class="label_name"><td>选择</td><td class="time">测试时间</td><td class="name">尿素氮</td>
+
+
+
+         <td class="name">尿酸</td><td class="score">肌酐</td><td class="operating">操作</td></tr>
+         </thead>
+       <tbody>
+            {volist name='list' id='user'}
+        <tr>
+        <td><input type="checkbox"  name="id[]" value="{$user.id}"></td><td>{$user.test_time}</td><td>{$user.usea}</td>
+        <td>{$user.purine_trione}</td>
+
+        <td>{$user.creatinine}</td>
+        <td class="operating_btn center"><a href="{:url('admin/index/update')}?id={$user.id}" >编辑</a>|<a href="view/id/{$user.id}">详情</a>|<a class="del" data-id="{$user.id}">删除</a></td></tr>
+
+         {/volist}
+       </tbody>
+      </table>
+
+      </div>
+      <div class="Pagination_tow">
+      <div class=" row" >
+      {$list->render()}
+      </div>
+     </div>
+    </div>
+ </div>
+ </form>
+</div>
+</div>
+
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#test1' //指定元素
+   // ,range: true
+});
+
+    // 点击删除按钮调用ajax 删除数据
+    $(".del").click(function(){
+        if (!confirm('确定要删除吗')) {
+            return false;
+        };
+        // 获取要修改记录的id
+        var rid = $(this).attr('data-id');
+        $.ajax({
+                         type: "POST",
+                         url: "{:url('admin/index/delete')}",
+                         data: {id:rid},
+                         dataType: "json",
+                         success: function (data) {
+                            console.log(data);
+                            // 提示信息
+                           layer.alert(data.msg,function(index){
+                            // 跳转至列表页面
+                            window.location.href="{:url('index/index/ulist')}";
+                           });
+                         }
+                     })
+    });
+</script>
+<!-- 底部 文件调用-->
+<!-- 底部 文件调用-->
+{include file="layout/footer_model_add"}
